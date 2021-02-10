@@ -1,0 +1,128 @@
+package com.cos.book.web;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+
+import com.cos.book.domain.Book;
+import com.cos.book.domain.BookRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Transactional
+@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
+public class BookControllerIntegreTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	private BookRepository bookRepository;
+	
+	@Autowired
+	private EntityManager entityManager;
+	
+	@BeforeEach
+	public void init() {
+		entityManager.createNativeQuery("ALTER TABLE book AUTO_INCREMENT = 1").executeUpdate();
+	}
+
+	@Test
+	public void save_테스트() throws Exception {
+		Book book = new Book(null, "시험치는중", 3.0, 2000);
+		String content = new ObjectMapper().writeValueAsString(book);
+		
+		ResultActions resultAction = mockMvc.perform(post("/book")
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.content(content)
+				.accept(MediaType.APPLICATION_JSON_UTF8));
+		
+		resultAction
+		.andExpect(status().isCreated())
+		.andExpect(jsonPath("$.title").value("시험치는중"))
+		.andDo(MockMvcResultHandlers.print());
+	}
+	
+	@Test
+	public void findAll_테스트() throws Exception {
+
+		// given
+		List<Book> books = new ArrayList<>();
+		books.add(new Book(null, "내일은 설날", 5.0, 5000));
+		books.add(new Book(null, "안드로이드", 10.0, 1000));
+		books.add(new Book(null, "스듀이토", 9.0, 1000));
+
+		bookRepository.saveAll(books);
+		
+		// when
+		ResultActions resultAction = mockMvc.perform(get("/book").accept(MediaType.APPLICATION_JSON_UTF8));
+
+		// then
+		resultAction.andExpect(status().isOk())
+		.andExpect(jsonPath("$").value())
+		.andDo(MockMvcResultHandlers.print());
+	}
+	
+	@Test
+	public void findById_테스트() throws Exception {
+
+		// given
+		Integer id = 2;
+		java.util.List<Book> books = new ArrayList<>();
+		books.add(new Book(null, "내일은 설날", 5.0, 5000));
+		books.add(new Book(null, "안드로이드", 10.0, 1000));
+		bookRepository.saveAll(books);
+
+		// when
+		ResultActions resultAction = mockMvc.perform(get("/book/{id}", id)
+				.accept(MediaType.APPLICATION_JSON_UTF8));
+
+		// then
+		resultAction.andExpect(status().isOk())
+		.andExpect(jsonPath("$.title").value("리엑트 따라하기"))
+		.andDo(MockMvcResultHandlers.print());
+	}
+	
+	@Test
+	public void delete_테스트() throws Exception {
+
+		// given
+		bookRepository.saveAll(Arrays.asList(new Book(null, "내일은 설날", 5.0, 5000), new Book(null, "안드로이드", 10.0, 1000)));
+		Integer id = 1;
+		
+		// when
+		ResultActions resultAction = mockMvc.perform(delete("/book/{id}", id));
+		// then
+		resultAction.andExpect(status().isOk())
+		.andDo(MockMvcResultHandlers.print());
+		
+		MvcResult requsetResult = resultAction.andReturn();
+		String result = requsetResult.getResponse().getContentAsString();
+		
+		assertEquals("ok", result);
+	}
+}

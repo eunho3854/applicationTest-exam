@@ -1,0 +1,13 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.cos.blog.domain.board.Board"><rhs name\="com.cos.blog.domain.board.Board"/></lhs><lhs name\="com.cos.blog.domain.board.dto.SaveReqDto"><rhs name\="com.cos.blog.domain.board.dto.SaveReqDto"/></lhs><lhs name\="com.cos.blog.domain.reply.dto.ReplyReqDto"><rhs name\="com.cos.blog.domain.reply.dto.ReplyReqDto"/></lhs><lhs name\="com.cos.project.service.UserService"><rhs name\="com.cos.project.service.UserService"/></lhs><lhs name\="com.cos.jspproject.domain.UserDao"><rhs name\="com.cos.jspproject.domain.UserDao"/></lhs><lhs name\="com.cos.jspproject.service.UserService"><rhs name\="com.cos.jspproject.service.UserService"/></lhs><lhs name\="com.cos.busanWeb.domain.sight.SightDao"><rhs name\="com.cos.busanWeb.domain.sight.SightDao"/></lhs><lhs name\="com.cos.busanWeb.domain.sight.Sight"><rhs name\="com.cos.busanWeb.domain.sight.Sight"/></lhs><lhs name\="com.cos.busanWeb.domain.sight.dto.ReplyReqDto"><rhs name\="com.cos.busanWeb.domain.sight.dto.ReplyReqDto"/></lhs><lhs name\="java.lang.Enum"><rhs name\="org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase$Replace"/><rhs name\="javax.persistence.GenerationType"/><rhs name\="org.springframework.http.HttpStatus"/><rhs name\="org.springframework.boot.test.context.SpringBootTest$WebEnvironment"/></lhs><lhs name\="java.lang.constant.Constable"><rhs name\="org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase$Replace"/><rhs name\="javax.persistence.GenerationType"/><rhs name\="org.springframework.http.HttpStatus"/><rhs name\="org.springframework.boot.test.context.SpringBootTest$WebEnvironment"/></lhs><lhs name\="org.springframework.util.MimeType"><rhs name\="org.springframework.http.MediaType"/></lhs><lhs name\="org.springframework.http.MediaType"><rhs name\="org.springframework.http.MediaType"/></lhs><lhs name\="org.springframework.http.HttpEntity"><rhs name\="org.springframework.http.ResponseEntity"/></lhs><lhs name\="org.springframework.http.ResponseEntity"><rhs name\="org.springframework.http.ResponseEntity"/></lhs></history>
+content_assist_number_of_computers=15
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=1
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.exception.name=e
+org.eclipse.jdt.ui.formatterprofiles.version=20
+org.eclipse.jdt.ui.gettersetter.use.is=true
+org.eclipse.jdt.ui.overrideannotation=true
+sourceHoverBackgroundColor=47,47,47
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

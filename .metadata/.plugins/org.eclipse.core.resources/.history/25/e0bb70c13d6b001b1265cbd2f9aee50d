@@ -1,0 +1,5 @@
+package com.cos.book.domain;
+
+public interface BookRepository {
+
+}

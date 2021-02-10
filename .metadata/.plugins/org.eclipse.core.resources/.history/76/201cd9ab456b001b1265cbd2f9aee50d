@@ -1,0 +1,28 @@
+package com.cos.book.web;
+
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.cos.book.domain.Book;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@WebMvcTest
+public class BookControllerIntegreTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
+
+	@MockBean
+	private BookContoller bookController;
+
+	@Test
+	public void save_테스트() throws Exception {
+		Book book = new Book(1, "시험치는중", 3.0, 2000);
+		String content = new ObjectMapper().writeValueAsString(book);
+	}
+}
